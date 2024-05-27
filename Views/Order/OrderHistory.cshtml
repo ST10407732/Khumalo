@@ -1,0 +1,111 @@
+﻿@model IEnumerable<KhumaloCraftKC.Models.Order>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Global styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('/Image/logo.jpg');
+            background-size: 30%;
+            background-position: center;
+        }
+        /* Container styling */
+        .container {
+            max-width: 800px; 
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings styling */
+        h1, h3 {
+            text-align: center;
+            color: black;
+        }
+
+        /* Table styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .table th, .table td {
+                border: 1px solid #ccc;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .table th {
+                background-color: deeppink;
+                color: white;
+            }
+
+            .table td img {
+                max-width: 100px;
+                max-height: 100px;
+                border-radius: 5px;
+            }
+
+            /* Row hover effect */
+            .table tbody tr:hover {
+                background-color: #f2f2f2;
+            }
+
+        /* Back to list link styling */
+        .back-link {
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+            color: deeppink;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Your Order placement has been successfully received,</h3>
+        <h3>Please Be Sure To Track Your Orders. Tracking Number Has Been Sent To Your Email Address</h3>
+
+        <h1>Order History</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td><img src="@order.Product.ImageUrl" alt="Product Image" /></td>
+                        <td>@order.Product.Name</td>
+                        <td>@order.Product.Category</td>
+                        <td>@order.Product.Price</td>
+                        <td>@order.Quantity</td>
+                        <td>@(order.Product.Price * order.Quantity)</td>
+                        <td>@order.OrderDate.ToString("yyyy-MM-dd")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <a asp-action="Index" class="back-link">Back to List</a>
+    </div>
+</body>
+</html>

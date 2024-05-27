@@ -1,0 +1,136 @@
+﻿@model KhumaloCraftKC.Models.PaymentViewModel
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Payment</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Global styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('/Image/logo.jpg');
+            background-size: 30%;
+            background-position: center;
+        }
+        /* Container styling */
+        .container {
+            max-width: 600px; /* Adjust width as needed */
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9; /* Light background for contrast */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading styling */
+        h1, h2 {
+            text-align: center;
+            color: deeppink;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            /* Label styling */
+            .form-group label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+        /* Input styling */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Button styling */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            background-color: deeppink;
+            color: white;
+        }
+
+            .btn:hover {
+                background-color: hotpink;
+            }
+
+        /* Delivery details styling */
+        .delivery-details {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+
+            .delivery-details p {
+                margin-bottom: 10px;
+            }
+    </style>
+
+    </head>
+
+
+<form asp-action="Index" method="post">
+ 
+ 
+          
+
+
+    <div class="form-group">
+        <label for="CardNumber">Card Number</label>
+        <input type="text" class="form-control" id="CardNumber" name="CardNumber" required />
+    </div>
+    <div class="form-group">
+        <label for="ExpirationDate">Expiration Date</label>
+        <input type="text" class="form-control" id="ExpirationDate" name="ExpirationDate" required />
+    </div>
+    <div class="form-group">
+        <label for="CVV">CVV</label>
+        <input type="text" class="form-control" id="CVV" name="CVV" required />
+    </div>
+
+    <div class="form-group" style="position: relative;">
+        <img src="/Image/Pay.jpg" alt="Payment Methods" style="width: 50px; height: auto; position: absolute; top: -30px; left: 10px;">
+        <label for="PaymentMethod">Select Payment Method</label>
+        <select class="form-control" id="PaymentMethod" name="PaymentMethod" required>
+            <option value="">Select Payment Method</option>
+            <option value="Visa">Visa</option>
+            <option value="Mastercard">Mastercard</option>
+            <option value="American Express">American Express</option>
+        </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Complete Payment</button>
+
+
+
+    <!-- Display delivery details -->
+    @if (ViewBag.DeliveryOptions != null)
+    {
+        <h2>Delivery Details</h2>
+        <p>Address: @ViewBag.DeliveryOptions.Address</p>
+        <p>City: @ViewBag.DeliveryOptions.City</p>
+        <p>Postal Code: @ViewBag.DeliveryOptions.PostalCode</p>
+        <p>Delivery Date: @ViewBag.DeliveryOptions.DeliveryDate</p>
+        <p>Delivery Instructions: @ViewBag.DeliveryOptions.DeliveryInstructions</p>
+    }
+</form>

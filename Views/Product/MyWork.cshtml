@@ -1,0 +1,127 @@
+﻿@model IEnumerable<KhumaloCraftKC.Models.Product>
+
+<h1>My Work</h1>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Global styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Container for products */
+        .gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 30%; /* Adjust as needed */
+            height: 550px; /* Set fixed height */
+            background-color: lightpink; /* Light pink background */
+        }
+
+            .gallery:hover {
+                border: 1px solid #777;
+            }
+
+            /* Product image styling */
+            .gallery img {
+                width: 100%;
+                height: 50%; /* Adjust as needed */
+                object-fit: cover;
+            }
+
+        /* Product details */
+        .desc {
+            padding: 15px;
+            text-align: center;
+        }
+
+            .desc h4,
+            .desc p {
+                color: black; /* Bold black text */
+                font-weight: bold;
+            }
+
+        /* Order button */
+        .order-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 20px;
+            background-color: deeppink; /* Default background color */
+            color: black; /* Default text color */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            /* On hover, change background color to blue and text color to white */
+            .order-btn:hover {
+                background-color: royalblue;
+                color: white;
+            }
+
+        }
+
+
+        /* Clearfix */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Heading style */
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .Mywork-container {
+            background-color: deeppink;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="Mywork-container">
+        <h1>Explore our handcrafted KhumaloCraft Flower Vases</h1>
+    </div>
+    @foreach (var product in Model)
+    {
+        <div class="gallery">
+            <a target="_blank" href="@product.ImageUrl">
+                <img src="@product.ImageUrl" alt="@product.Name">
+            </a>
+            <div class="desc">
+                <h4>@product.Name</h4>
+                <p>Price: @product.Price each</p>
+                <p>Category: @product.Category</p>
+                @if (product.Availability)
+                {
+                    <p>Availability: Available</p>
+                    <button class="order-btn" onclick="orderProduct('@product.ProductId')">Order</button>
+                }
+                else
+                {
+                    <p>Product currently unavailable</p>
+                   
+                }
+
+            </div>
+        </div>
+    }
+
+    <div class="clearfix"></div>
+
+    <script>
+        function orderProduct(productId) {
+            // Redirect to order page with selected product ID
+            window.location.href = "/Order/Create?productId=" + productId;
+        }
+    </script>
+</body>
+</html>
